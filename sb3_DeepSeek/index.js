@@ -11,7 +11,7 @@ const config = {
     // 当然前提是请求和返回要跟ds api一致
   
     name: "deepseek-chat", // 请求的模型名称
-    key: "sk-709a9926e063476780251f74ab47ad88", // 请求密钥
+    key: "sk-00000000000000000000000000000000", // 请求密钥
     url: "https://api.deepseek.com/v1/chat/completions", // 请求的ai端点
 
     // === token上线 == //
