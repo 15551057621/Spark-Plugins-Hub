@@ -1,0 +1,10 @@
+{
+    "name": "SimpleLike",
+    "author": "冰凌呀",
+    "version": [0, 0, 1],
+    "desc": "在你的QQ群内使用点赞功能吧~",
+    "loadmode":"bds",
+    "priority": "post",
+    "permission": "key",
+    "load": true
+}

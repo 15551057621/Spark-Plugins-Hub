@@ -1,0 +1,10 @@
+{
+    "name": "DeepSeed",
+    "author": "冰凌呀",
+    "version": [0, 0, 2],
+    "desc": "在你的QQ群内接入DS酱吧~",
+    "loadmode":"bds",
+    "priority": "post",
+    "permission": "key",
+    "load": true
+}

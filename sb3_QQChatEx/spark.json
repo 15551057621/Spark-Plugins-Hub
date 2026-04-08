@@ -1,0 +1,10 @@
+{
+    "name": "QQChatEx",
+    "author": "冰凌呀",
+    "version": [1, 0, 0],
+    "desc": "更好的聊天转发插件",
+    "loadmode":"bds",
+    "priority": "post",
+    "permission": "core",
+    "load": true
+}
