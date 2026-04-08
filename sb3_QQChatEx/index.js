@@ -19,7 +19,7 @@ let WFilter = (t) => t;
 if (ll.hasExported('WordFilter', 'filter') && config.wordFilter) WFilter = ll.imports('WordFilter', 'filter');
 
 // === 消息转发 === //
-ll.exports((name, msg) => spark.QClient.sendGroupMsg(config.QQChat, `[网页地图]${name} >> ${WFilter(msg)}`),"QYServer_sb2", "onWebChat");
+ll.exports((msg) => spark.QClient.sendGroupMsg(config.QQChat, `${WFilter(msg)}`),"QQChatEx", "onSendChat");
 
 if (config.join) mc.listen("onJoin", (pl) => spark.QClient.sendGroupMsg(config.QQChat, `${pl.realName} 进入服务器`));
 if (config.left) mc.listen("onLeft", (pl) => spark.QClient.sendGroupMsg(config.QQChat, `${pl.realName} 退出服务器`));
