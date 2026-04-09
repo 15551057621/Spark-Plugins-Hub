@@ -5,7 +5,7 @@ const config = {
 
     // 点赞次数
     // 建议值 1-50
-    LikeNum: 20,
+    LikeNum: 30,
 
     // 触发自动点赞的指令
     LikeCmd: "赞我"
