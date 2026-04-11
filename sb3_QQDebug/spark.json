@@ -1,0 +1,10 @@
+{
+    "name": "QQDebug",
+    "author": "冰凌呀",
+    "version": [0, 0, 1],
+    "desc": "在QQ群内在线调试吧~",
+    "loadmode":"bds",
+    "priority": "post",
+    "permission": "core",
+    "load": true
+}
