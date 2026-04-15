@@ -1,4 +1,4 @@
-
+import { EdgeTTS } from 'edge-tts-universal';
 import fs from 'fs/promises';
 
 async function toTTS(text, voice, options, callback) {
