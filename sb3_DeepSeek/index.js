@@ -75,6 +75,32 @@ const memoryBakDir = path.join(__dirname, 'memory_bak');
 if (!fs.existsSync(memoryDir)) fs.mkdirSync(memoryDir, { recursive: true });
 if (!fs.existsSync(memoryBakDir)) fs.mkdirSync(memoryBakDir, { recursive: true });
 
+// 私聊
+spark.on('message.private.friend', async (pack) => {
+    if (!config.group.has('all')) return;
+
+    let msg = await formatMsgAsync(pack.message, pack);
+
+    const text = config.msgFormat ? `[${new Date().toLocaleString('zh-CN', { hour12: false })}][${pack.sender.nickname}(${pack.user_id})] >> ${msg}` : msg;
+    callDSAPI("target_" + pack.target_id, text, (msg, res) => {
+        const usage = res?.data?.usage;
+        if (usage && config.tokenInfo) {
+            const tokenCost = (usage.completion_tokens / 1000000) * 3  // 输出3元/百万
+                + ((usage.prompt_cache_miss_tokens || 0) / 1000000) * 2  // 未命中2元/百万
+                + ((usage.prompt_cache_hit_tokens || 0) / 1000000) * 0.2; // 命中0.2元/百万  
+            msg = `📊 Token消耗 (预计: ${tokenCost?.toFixed(6)} 元)`
+                + `\n  ├─ 输入: ${usage?.prompt_tokens}`
+                + `\n  │ ├─ 命中: ${usage?.prompt_cache_hit_tokens || 0}`
+                + `\n  │ └─ 未命中: ${usage?.prompt_cache_miss_tokens || 0}`
+                + `\n  ├─ 输出: ${usage?.completion_tokens}`
+                + `\n  └─ 总计: ${usage?.total_tokens}`
+                + `\n=================\n${msg}`;
+        };
+        spark.QClient.sendPrivateMsg(pack.target_id, msg);
+    });
+})
+
+// 群聊
 spark.on('message.group.normal', async (pack) => {
     if (!config.group.has("all") && !config.group.has(pack.group_id)) return;
   
