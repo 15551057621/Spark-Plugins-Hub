@@ -17,6 +17,6 @@ spark.on('message.group.normal', (pack, reply) => {
         || config.QQGroup.has(pack.group_id)) 
         && pack.raw_message == config.LikeCmd
     )) return;
-    spark.QClient.sendLike(pack.qq_uid, config.LikeNum);
+    spark.QClient.sendLike(pack.sender.user_id, config.LikeNum);
     reply(`点赞完成! 你收获了 ${config.LikeNum} 个赞!`);
 })
