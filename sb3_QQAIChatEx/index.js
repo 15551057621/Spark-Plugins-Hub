@@ -25,8 +25,8 @@ const config = {
     input: {
         text: true, // 文本消息 （这个要是关了我们玩什么）
         image: true, // 图片消息
-        audio: true, // 语音消息
-        video: true // 视频消息
+        audio: false, // 语音消息
+        video: false // 视频消息
     },
 
     // === token上线 == //
@@ -39,7 +39,15 @@ const config = {
     // 设置响应的模式，可在下面列表内选一个数字填入：
     // 0: 处理每一条  || 处理每一条收到的信息
     // 1: 仅at       || 只有@了机器人 她才会鸟你
+    // 2: 仅群聊      || 只有群聊才会鸟你
+    // 3: 仅私聊      || 只有私聊才会鸟你
     mode: 1,
+
+    // === 不回复概率 === //
+    // 设置概率回复的概率，范围 0-100
+    // 填写40表示40%概率不回复，60%概率回复
+    // 填写0关闭
+    probability: 0,
 
     // === 响应的群聊 === //
     // 设置要响应的群聊，只有列表内的群聊收到消息会响应，不在列表内的鸟都不鸟你（
@@ -115,12 +123,22 @@ async function onMessage(pack, reply) {
         || config.group.has(chatId)
     )) return;
 
-    switch (config.mode) {
-        case 0: break;
-        case 1:
+    switch (config.mode) { // 响应模式
+        case 0: break; // all
+        case 1: // at
             if (!pack.message.some(i => (i.type === "at" && i.data.qq == pack.self_id))) return;
             break;
+        case 2: // group
+            if (chatId[0] === "t") return;
+            break;
+        case 3: // private
+            if (chatId[0] !== "t") return;
+            break;
     }
+
+    if (config.probability // 不回复概率
+        && (Math.random() * 100 < Math.max(0, Math.min(100, config.probability)))
+    ) return;
 
     callAPI(chatId, (await formatMsg(pack, 0)), (msg, res) => {
         const usage = res?.data?.usage;
