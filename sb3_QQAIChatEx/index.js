@@ -14,8 +14,7 @@ const config = {
     // 如果你是高级用户，可以通过修改下面三个项来达到接入其他平台AI的目的
     // 当然前提是请求和返回要跟平台的api一致
 
-    // key: "sk-000000000000000000000000000000000000000000000000", // 请求密钥
-    key: "sk-zqavmgduwrydmfbcwrbnijmphtbckutmiplvkepgclwipnsx",
+    key: "sk-000000000000000000000000000000000000000000000000", // 请求密钥
     url: "https://api.siliconflow.cn/v1/chat/completions", // 请求的ai端点
 
     name: "Qwen/Qwen3-Omni-30B-A3B-Instruct", // 多模态模型名称
